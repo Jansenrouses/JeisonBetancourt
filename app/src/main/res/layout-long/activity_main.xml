@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/fondo1"
+    tools:context=".MainActivity"
+    tools:ignore="MissingDefaultResource">
+
+
+    <TextView
+        android:id="@+id/Texto_guia"
+        android:layout_width="411dp"
+        android:layout_height="360dp"
+        android:text="Ingresa tu e-mail/usuario y contraseña para iniciar sesión"
+        android:textAlignment="gravity"
+        android:textSize="60sp"
+        tools:layout_editor_absoluteX="41dp"
+        tools:layout_editor_absoluteY="545dp" />
+
+    <EditText
+        android:id="@+id/Solicitar_contraseña"
+        android:layout_width="233dp"
+        android:layout_height="46dp"
+        android:ems="10"
+        android:inputType="text"
+        android:text="Contraseña"
+        tools:layout_editor_absoluteX="514dp"
+        tools:layout_editor_absoluteY="705dp" />
+
+    <AutoCompleteTextView
+        android:id="@+id/Usuario"
+        android:layout_width="234dp"
+        android:layout_height="44dp"
+        android:hint="Usuario"
+        tools:layout_editor_absoluteX="514dp"
+        tools:layout_editor_absoluteY="648dp" />
+
+    <EditText
+        android:id="@+id/editTextTextPassword"
+        android:layout_width="233dp"
+        android:layout_height="48dp"
+        android:ems="10"
+        android:hint="Contraseña"
+        android:inputType="textPassword"
+        tools:layout_editor_absoluteX="514dp"
+        tools:layout_editor_absoluteY="764dp" />
+
+    <Button
+        android:id="@+id/Crear_cuenta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#0C7BC8"
+        android:text="Crear cuenta"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="619dp"
+        tools:layout_editor_absoluteY="826dp" />
+
+    <EditText
+        android:id="@+id/Solicitar_usuario"
+        android:layout_width="230dp"
+        android:layout_height="48dp"
+        android:ems="10"
+        android:inputType="text"
+        android:text="E-mail o usuario"
+        tools:layout_editor_absoluteX="514dp"
+        tools:layout_editor_absoluteY="579dp" />
+
+    <Button
+        android:id="@+id/Ingresar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#0C7BC9"
+        android:text="Ingresar"
+        android:textColorLink="#6750A3"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="514dp"
+        tools:layout_editor_absoluteY="826dp" />
+
+    <TextView
+        android:id="@+id/Titulo"
+        android:layout_width="521dp"
+        android:layout_height="114dp"
+        android:text="Mi Tienda Online"
+        android:textAlignment="center"
+        android:textSize="60sp"
+        tools:layout_editor_absoluteX="164dp"
+        tools:layout_editor_absoluteY="186dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

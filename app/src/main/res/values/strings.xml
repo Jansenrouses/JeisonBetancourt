@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Jeison Betancourt</string>
+    <string name="bebidas">Bebidas</string>
+    <string name="descripcion_producto">Descripción del producto</string>
+    <string name="nombre_producto">Nombre del producto</string>
+    <string name="precio_producto">Precio del producto</string>
+    <string name="imagen1">imagen1</string>
+    <string name="botoncomprar">botoncomprar</string>
+</resources>
