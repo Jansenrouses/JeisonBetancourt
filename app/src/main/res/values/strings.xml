@@ -6,4 +6,12 @@
     <string name="precio_producto">Precio del producto</string>
     <string name="imagen1">imagen1</string>
     <string name="botoncomprar">botoncomprar</string>
+    <string name="mi_tienda_online">Mi Tienda Online</string>
+    <string name="ingresa_tu_e_mail_usuario_y_contrase_a_para_iniciar_sesi_n">Ingresa tu e-mail/usuario y contraseña para iniciar sesión</string>
+    <string name="email_usuario">Email/Usuario</string>
+    <string name="contrasena">Contraseña</string>
+    <string name="iniciar_sesion">Iniciar Sesión</string>
+    <string name="crear_cuenta">Crear Cuenta</string>
+    <string name="product_image_description_1" />
+    <string name="producto1" />
 </resources>

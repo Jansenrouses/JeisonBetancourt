@@ -1,64 +1,186 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="270dp"
-    android:layout_margin="15dp"
-    android:background="@drawable/fondo1"
-    app:cardCornerRadius="5dp"
-    app:cardElevation="5dp"
-    tools:context=".items_productos">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ItemsProductos">
 
 
-    <LinearLayout
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="281dp"
-        android:orientation="vertical"
-        android:padding="15dp">
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:contentDescription="@string/imagen1"
-            app:srcCompat="@drawable/chaqueta1" />
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:backgroundTint="#0047A1"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
         <TextView
-            android:id="@+id/nombre_producto"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/nombre_producto"
+            android:layout_gravity="center"
+            android:text="Productos"
+            android:textColor="@android:color/white"
             android:textSize="20sp"
             android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/descripcion_producto"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/descripcion_producto" />
+        <ImageButton
+            android:id="@+id/boton_carrito"
+            android:layout_width="67dp"
+            android:layout_height="56dp"
+            android:background="?attr/selectableItemBackground"
+            android:backgroundTint="#0047A1"
+            android:contentDescription="boton_carrito"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:onClick="abrirCarrito"
+            app:srcCompat="@drawable/carrito" />
+
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:background="@drawable/fondo1"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="5dp">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/precio_producto"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="@string/precio_producto"
-                android:textSize="22sp"
-                android:textStyle="bold" />
+            <ImageView
+                android:id="@+id/imagen_producto_1"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:contentDescription="@string/product_image_description_1"
+                android:scaleType="centerCrop"
+                android:layout_gravity="center"
+                android:src="@drawable/chaqueta1" />
 
-            <ImageButton
-                android:id="@+id/imageButton"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:background="@drawable/boton_redondo"
-                android:contentDescription="@string/botoncomprar"
-                app:srcCompat="@drawable/comprar" />
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/Nombre_Producto_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:text="Producto1"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/Descripcion_Producto_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:text="Chaqueta beige casual"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/Precio_Producto_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:text="Precio: $100"
+                    android:textSize="14sp"
+                    android:textColor="@android:color/holo_red_dark" />
+
+                <ImageButton
+                    android:id="@+id/imageButton"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/boton_redondo"
+                    android:contentDescription="@string/botoncomprar"
+                    app:srcCompat="@drawable/comprar" />
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
-</androidx.cardview.widget.CardView>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Segundo producto -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:background="@drawable/fondo1"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="5dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/imagen_producto_2"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:contentDescription="producto_imagen_descripcion_2"
+                android:scaleType="centerCrop"
+                android:src="@drawable/chaqueta2" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center_vertical"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp">
+
+                <TextView
+                    android:id="@+id/Nombre_Producto_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Producto2"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/Descripcion_Producto_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Chaqueta azul abrigada"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/Precio_Producto_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Precio: $89.99"
+                    android:textSize="14sp"
+                    android:textColor="@android:color/holo_red_dark" />
+
+                <ImageButton
+                    android:id="@+id/imageButton_2"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/boton_redondo"
+                    android:contentDescription="@string/botoncomprar"
+                    android:scaleType="centerInside"
+                    app:srcCompat="@drawable/comprar" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>

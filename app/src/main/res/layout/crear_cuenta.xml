@@ -49,33 +49,6 @@
                 android:inputType="textEmailAddress"
                 android:padding="12dp" />
 
-            <TextView
-                android:id="@+id/nombres"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Digite su nombre"
-                android:padding="12dp" />
-
-            <TextView
-                android:id="@+id/apellidos"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Digite sus apellidos"
-                android:padding="12dp" />
-
-            <TextView
-                android:id="@+id/telefono"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Digite su numero de telefono"
-                android:padding="12dp" />
-
-            <TextView
-                android:id="@+id/textView8"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Cual es su genero"
-                android:padding="12dp" />
 
             <EditText
                 android:id="@+id/editTextTextPassword2"
@@ -112,7 +85,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:backgroundTint="#0054B1"
-                        android:text="Crear" />
+                        android:text="Crear"
+                        />
 
                     <Button
                         android:id="@+id/cancelar"
@@ -120,7 +94,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:backgroundTint="#0054B0"
-                        android:text="Cancelar" />
+                        android:text="Cancelar"
+                        />
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>

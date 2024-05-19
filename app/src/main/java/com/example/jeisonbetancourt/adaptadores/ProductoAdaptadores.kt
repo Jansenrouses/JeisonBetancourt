@@ -50,9 +50,9 @@ class ProductoAdaptadores(val productos: ArrayList<producto>) : RecyclerView.Ada
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bindItems(producto: producto) {
-            val nombre = itemView.findViewById<TextView>(R.id.nombre_producto)
+            val nombre = itemView.findViewById<TextView>(R.id.Nombre_Producto_1)
             nombre.text = producto.nombre
-            val descripcion = itemView.findViewById<TextView>(R.id.descripcion_producto)
+            val descripcion = itemView.findViewById<TextView>(R.id.Descripcion_Producto_1)
             descripcion.text = producto.descripcion
 
         }
