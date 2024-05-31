@@ -14,4 +14,6 @@
     <string name="crear_cuenta">Crear Cuenta</string>
     <string name="product_image_description_1" />
     <string name="producto1" />
+    <string name="cambiar_contrasena">Cambiar Contraseña</string>
+    <string name="eliminar_cuenta">Eliminar Cuenta</string>
 </resources>

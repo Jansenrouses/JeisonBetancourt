@@ -7,18 +7,27 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
-import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
+import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var userDAO: UserDAO
+    private lateinit var usernameLayout: TextInputLayout
+    private lateinit var passwordLayout: TextInputLayout
+    private lateinit var nombreusuario: TextInputEditText
+    private lateinit var password: TextInputEditText
+    private lateinit var loginButton: Button
+    private lateinit var createAccountButton: Button
+    private lateinit var changePasswordButton: Button
+    private lateinit var deleteAccountButton: Button
 
     companion object {
         private const val LOCATION_PERMISSION_REQUEST_CODE = 1001
@@ -48,16 +57,33 @@ class MainActivity : AppCompatActivity() {
             requestLocation()
         }
 
-        // Asigna el botón de crear cuenta
-        val crearCuentaButton: Button = findViewById(R.id.create_account_button)
-        crearCuentaButton.setOnClickListener {
+        // Inicializar vistas
+        usernameLayout = findViewById(R.id.email_layout)
+        passwordLayout = findViewById(R.id.password_layout)
+        nombreusuario = findViewById(R.id.email)
+        password = findViewById(R.id.password)
+        loginButton = findViewById(R.id.login_button)
+        createAccountButton = findViewById(R.id.create_account_button)
+        changePasswordButton = findViewById(R.id.change_password_button)
+        deleteAccountButton = findViewById(R.id.delete_account_button)
+
+        // Asignar acciones a los botones
+        loginButton.setOnClickListener {
+            if (validarEntrada()) {
+                iniciarSesion()
+            }
+        }
+
+        createAccountButton.setOnClickListener {
             abrirCrearCuentaActivity()
         }
 
-        // Asigna el botón de iniciar sesión
-        val iniciarSesionButton: Button = findViewById(R.id.login_button)
-        iniciarSesionButton.setOnClickListener {
-            iniciarSesion()
+        changePasswordButton.setOnClickListener {
+            abrirCambiarContraseñaActivity()
+        }
+
+        deleteAccountButton.setOnClickListener {
+            abrirEliminarCuentaActivity()
         }
     }
 
@@ -104,16 +130,39 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun iniciarSesion() {
-        val usernameEditText: EditText = findViewById(R.id.email)
-        val passwordEditText: EditText = findViewById(R.id.password)
-        val username = usernameEditText.text.toString()
-        val password = passwordEditText.text.toString()
+    private fun validarEntrada(): Boolean {
+        var isValid = true
 
-        val user = userDAO.getUser(username)
-        if (user != null && user.contrasena == password) { // Asegúrate de que el nombre del campo de contraseña sea 'contrasena'
+        // Validar nombre de usuario
+        val nombreusuarioText = nombreusuario.text.toString()
+        if (nombreusuarioText.isEmpty()) {
+            usernameLayout.error = "El nombre de usuario no puede estar vacío"
+            isValid = false
+        } else {
+            usernameLayout.error = null
+        }
+
+        // Validar contraseña
+        val passwordText = password.text.toString()
+        if (passwordText.isEmpty()) {
+            passwordLayout.error = "La contraseña no puede estar vacía"
+            isValid = false
+        } else {
+            passwordLayout.error = null
+        }
+
+        return isValid
+    }
+
+    private fun iniciarSesion() {
+        // Lógica de inicio de sesión
+        val nombreusuarioText = nombreusuario.text.toString()
+        val passwordText = password.text.toString()
+
+        val user = userDAO.getUserByUsernameAndPassword(nombreusuarioText, passwordText)
+        if (user != null) {
             // Inicio de sesión exitoso
-            Log.d("Login", "Inicio de sesión exitoso para el usuario: $username")
+            Log.d("Login", "Inicio de sesión exitoso para el usuario: ${user.nombreusuario}")
             val intent = Intent(this, ItemsProductos::class.java)
             startActivity(intent)
         } else {
@@ -125,6 +174,16 @@ class MainActivity : AppCompatActivity() {
 
     private fun abrirCrearCuentaActivity() {
         val intent = Intent(this, CrearCuentaActivity::class.java)
+        startActivity(intent)
+    }
+
+    private fun abrirCambiarContraseñaActivity() {
+        val intent = Intent(this, CambiarContraseña::class.java)
+        startActivity(intent)
+    }
+
+    private fun abrirEliminarCuentaActivity() {
+        val intent = Intent(this, EliminarCuenta::class.java)
         startActivity(intent)
     }
 

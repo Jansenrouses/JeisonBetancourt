@@ -1,56 +1,89 @@
 package com.example.jeisonbetancourt
 
-import DatabaseHelper
-import android.content.Context
 import android.content.ContentValues
+import android.content.Context
 import android.database.Cursor
+import android.database.sqlite.SQLiteDatabase
+import android.database.sqlite.SQLiteOpenHelper
 
-class UserDAO(context: Context) {
+class UserDAO(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 
-    private val dbHelper = DatabaseHelper(context)
+    companion object {
+        private const val DATABASE_NAME = "user_database.db"
+        private const val DATABASE_VERSION = 1
+
+        const val TABLE_NAME = "usuarios"
+        const val COLUMN_ID = "id"
+        const val COLUMN_USERNAME = "nombre_usuario"
+        const val COLUMN_PASSWORD = "contraseña"
+    }
+
+    override fun onCreate(db: SQLiteDatabase?) {
+        db?.execSQL("CREATE TABLE $TABLE_NAME ($COLUMN_ID INTEGER PRIMARY KEY AUTOINCREMENT, $COLUMN_USERNAME TEXT, $COLUMN_PASSWORD TEXT)")
+    }
+
+    override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
+        db?.execSQL("DROP TABLE IF EXISTS $TABLE_NAME")
+        onCreate(db)
+    }
 
     fun addUser(user: User): Long {
-        val db = dbHelper.writableDatabase
+        val db = this.writableDatabase
         val values = ContentValues().apply {
-            put(DatabaseHelper.COLUMN_USERNAME, user.nombreusuario)
-            put(DatabaseHelper.COLUMN_PASSWORD, user.contrasena)
+            put(COLUMN_USERNAME, user.nombreusuario)
+            put(COLUMN_PASSWORD, user.contrasena)
         }
-        val id = db.insert(DatabaseHelper.TABLE_NAME, null, values)
+        val id = db.insert(TABLE_NAME, null, values)
         db.close()
         return id
     }
-
-    fun getUser(username: String): User? {
-        val db = dbHelper.readableDatabase
-        val cursor: Cursor = db.query(
-            DatabaseHelper.TABLE_NAME,
-            arrayOf(DatabaseHelper.COLUMN_ID, DatabaseHelper.COLUMN_USERNAME, DatabaseHelper.COLUMN_PASSWORD),
-            "${DatabaseHelper.COLUMN_USERNAME} = ?",
-            arrayOf(username),
-            null,
-            null,
-            null,
-            "1"
-        )
-        val idIndex = cursor.getColumnIndex(DatabaseHelper.COLUMN_ID)
-        val usernameIndex = cursor.getColumnIndex(DatabaseHelper.COLUMN_USERNAME)
-        val passwordIndex = cursor.getColumnIndex(DatabaseHelper.COLUMN_PASSWORD)
-
-        var user: User? = null
-
-        if (cursor.moveToFirst()) {
-            if (idIndex != -1 && usernameIndex != -1 && passwordIndex != -1) {
-                val id = cursor.getLong(idIndex)
-                val username = cursor.getString(usernameIndex)
-                val password = cursor.getString(passwordIndex)
-
-                user = User(id, username, password)
-            }
-        }
-
-        cursor.close()
-        db.close()
-
-        return user
+    fun getUserByUsername(username: String): User? {
+        val db = this.readableDatabase
+        val cursor = db.query(TABLE_NAME, arrayOf(COLUMN_ID, COLUMN_USERNAME, COLUMN_PASSWORD),
+            "$COLUMN_USERNAME=?", arrayOf(username), null, null, null)
+        return if (cursor != null && cursor.moveToFirst()) {
+            val user = User(
+                cursor.getLong(cursor.getColumnIndexOrThrow(COLUMN_ID)), // Cambiar getInt a getLong
+                cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_USERNAME)),
+                cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_PASSWORD))
+            )
+            cursor.close()
+            user
+        } else {
+            null
         }
     }
+
+    fun getUserByUsernameAndPassword(username: String, password: String): User? {
+        val db = this.readableDatabase
+        val cursor = db.query(TABLE_NAME, arrayOf(COLUMN_ID, COLUMN_USERNAME, COLUMN_PASSWORD),
+            "$COLUMN_USERNAME=? AND $COLUMN_PASSWORD=?", arrayOf(username, password), null, null, null)
+        return if (cursor != null && cursor.moveToFirst()) {
+            val user = User(
+                cursor.getLong(cursor.getColumnIndexOrThrow(COLUMN_ID)), // Cambiar getInt a getLong
+                cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_USERNAME)),
+                cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_PASSWORD))
+            )
+            cursor.close()
+            user
+        } else {
+            null
+        }
+    }
+
+    fun deleteUser(user: User) {
+        val db = this.writableDatabase
+        db.delete(TABLE_NAME, "$COLUMN_ID=?", arrayOf(user.id.toString())) // Cambiar user.id a user.id.toString()
+        db.close()
+    }
+
+    fun updateUser(user: User) {
+        val db = this.writableDatabase
+        val values = ContentValues().apply {
+            put(COLUMN_USERNAME, user.nombreusuario)
+            put(COLUMN_PASSWORD, user.contrasena)
+        }
+        db.update(TABLE_NAME, values, "$COLUMN_ID=?", arrayOf(user.id.toString())) // Cambiar user.id a user.id.toString()
+        db.close()
+    }
+}
